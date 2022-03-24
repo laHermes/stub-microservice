@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { NotAuthorizerError } from '../errors/not-authorized-error';
 
 export const requireAuth = (
 	req: Request,
@@ -9,6 +10,8 @@ export const requireAuth = (
 	// we have to make sure this middleware is not run before the currentUser middleware
 
 	if (!req.currentUser) {
-		return res.status(401).send();
+		throw new NotAuthorizerError();
 	}
+
+	next();
 };
