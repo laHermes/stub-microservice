@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(
 	cookieSession({
 		signed: false,
-		secure: true,
+		secure: process.env.NODE_ENV !== 'test',
 	})
 );
 app.use(currentUserRouter);
@@ -36,4 +36,5 @@ app.get('*', async () => {
 //errors must be standardized!
 app.use(errorHandler);
 
+// use app to start server & testing
 export { app };
