@@ -3,6 +3,7 @@ import 'express-async-errors';
 import cookieSession from 'cookie-session';
 import { createTicketRouter } from './routes/new';
 import { NotFoundError, errorHandler, currentUser } from '@microstub/common';
+import { showTicketRouter } from './routes/show';
 
 const app = express();
 // traffick is provide through ingress
@@ -18,6 +19,7 @@ app.use(
 
 app.use(currentUser);
 
+app.use(showTicketRouter);
 app.use(createTicketRouter);
 
 //async can wreck havoc
