@@ -24,15 +24,10 @@ it('returns a status other than 401 if the user is signed in', async () => {
 
 it('returns error on invalid title', async () => {
 	const cookie = global.signin();
-	await request(app)
-		.post('/api/tickets')
-		.set('Cookie', cookie)
-		.send({
-			title: '',
-			price: 10,
-		})
-		.expect(400);
-
+	await request(app).post('/api/tickets').set('Cookie', cookie).send({
+		title: '',
+		price: 10,
+	});
 	await request(app)
 		.post('/api/tickets')
 		.set('Cookie', cookie)
@@ -62,10 +57,25 @@ it('returns error on invalid price', async () => {
 });
 
 it('creates ticket with valid inputs', async () => {
+	const cookie = global.signin();
+
 	let tickets = await Ticket.find({});
 	expect(tickets.length).toEqual(0);
 
-	await request(app).post('/api/tickets').send({ title: 'asdas', price: 20 });
+	const title = 'Ticket';
+	const price = 20;
+
+	await request(app)
+		.post('/api/tickets')
+		.set('Cookie', cookie)
+		.send({ title, price })
+		.expect(201);
+
+	tickets = await Ticket.find({});
+
+	expect(tickets.length).toEqual(1);
+	expect(tickets[0].title).toEqual(title);
+	expect(tickets[0].price).toEqual(price);
 });
 
 // it("has a route handler listening to /api/tickets for post request", () =>{

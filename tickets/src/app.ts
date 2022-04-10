@@ -1,9 +1,8 @@
 import express from 'express';
 import 'express-async-errors';
 import cookieSession from 'cookie-session';
-
-import { NotFoundError, errorHandler, currentUser } from '@microstub/common';
 import { createTicketRouter } from './routes/new';
+import { NotFoundError, errorHandler, currentUser } from '@microstub/common';
 
 const app = express();
 // traffick is provide through ingress

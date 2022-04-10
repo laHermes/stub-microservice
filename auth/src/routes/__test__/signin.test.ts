@@ -12,7 +12,7 @@ it('fails when a email that does not exist is supplied', async () => {
 });
 
 it('fails when an incorrect password supplied', async () => {
-	return request(app)
+	await request(app)
 		.post('/api/users/signup')
 		.send({
 			email: 'test@test.com',
@@ -30,7 +30,7 @@ it('fails when an incorrect password supplied', async () => {
 });
 
 it('Expects cookies on successful sign in', async () => {
-	return request(app)
+	await request(app)
 		.post('/api/users/signup')
 		.send({
 			email: 'test@test.com',
