@@ -2,7 +2,7 @@ import request from 'supertest';
 import { app } from '../../app';
 
 it('returns 201 on successful signup', async () => {
-	return request(app)
+	request(app)
 		.post('/api/users/signup')
 		.send({
 			email: 'test@test.com',
@@ -15,5 +15,7 @@ it('returns 201 on successful signup', async () => {
 		.send({})
 		.expect(200);
 
-	expect(response.get('Set-Cookie')).toBeUndefined();
+	expect(response.get('Set-Cookie')).toEqual([
+		'session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly',
+	]);
 });
