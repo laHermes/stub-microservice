@@ -10,7 +10,7 @@ const AppComponent = ({ Component, pageProps, currentUser }) => {
 	);
 };
 
-// this is very different getInitialProps from ones in page components
+// this is very different getInitialProps from the one in page components
 // different getInitialProps may collide
 AppComponent.getInitialProps = async (appContext) => {
 	const client = buildClient(appContext.ctx);
