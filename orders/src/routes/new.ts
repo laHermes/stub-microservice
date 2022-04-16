@@ -11,6 +11,8 @@ import { body } from 'express-validator';
 
 import { Ticket } from '../models/ticket';
 import { Order } from '../models/order';
+import { OrderCancelledPublisher } from '../events/publishers/order-cancelled-publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -30,7 +32,7 @@ router.post(
 	async (req: Request, res: Response) => {
 		const { ticketId } = req.body;
 
-		const ticket = await Ticket.findById(req.body.ticketId);
+		const ticket = await Ticket.findById(ticketId);
 		if (!ticket) {
 			throw new NotFoundError();
 		}
@@ -53,6 +55,17 @@ router.post(
 		});
 
 		await order.save();
+
+		new OrderCancelledPublisher(natsWrapper.client).publish({
+			id: order.id,
+			status: order.status,
+			userId: order.userId,
+			expiresAt: order.expiresAt.toISOString(),
+			ticket: {
+				id: ticket.id,
+				price: ticket.price,
+			},
+		});
 
 		res.status(201).send(order);
 	}
