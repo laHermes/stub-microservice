@@ -37,8 +37,6 @@ router.delete(
 			},
 		});
 
-		// to UTC string: toISOString()
-
 		res.status(204).send(order);
 	}
 );
