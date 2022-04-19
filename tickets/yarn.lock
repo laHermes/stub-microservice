@@ -488,10 +488,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@microstub/common@^1.0.11":
-  version "1.0.11"
-  resolved "https://registry.npmjs.org/@microstub/common/-/common-1.0.11.tgz"
-  integrity sha512-HQOSnp+2TfNxhPEBf3wn+siKhjZu6DsY1Mt2JWsAjgyWewDIMzZSTU9BfiuK8xX40odSKNLnsVaDO11dnS8yIA==
+"@microstub/common@^1.0.19":
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/@microstub/common/-/common-1.0.19.tgz#dda6933756c450c122d68f03ca2e9e432626081e"
+  integrity sha512-ijgVpfuHfM9dFyeiLGLlVmYMTI20Nofcy3TeO5LWJq0br09fitJZb7+M3UpIO/5F0DFHiVGT7U0mXnxgT4R+cA==
   dependencies:
     "@types/cookie-session" "^2.0.44"
     "@types/express" "^4.17.13"
